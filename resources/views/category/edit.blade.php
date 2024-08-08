@@ -10,10 +10,10 @@
         @method('PUT')
         <div class="form-group">
             <label for="">Nama Lengkap</label>
-            <input class="form-control" type="text" name="name" value="{{ $edit->category_name }}">
+            <input class="form-control" type="text" name="category_name" value="{{$edit->category_name}}">
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-dark" >Save</button>
+            <button type="submit" class="btn btn-dark">Save</button>
             <a href="{{url()->previous()}}">Back</a>
         </div>
     </form>
