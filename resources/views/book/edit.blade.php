@@ -1,11 +1,11 @@
 @extends('layout.app')
-@section('title', 'Edit Category')
+@section('title', 'Edit Book')
 
 
 {{-- <h1>Edit User</h1> --}}
 @section('content')
 
-    <form action="{{ route('category.update', $edit->id) }}" method="post">
+    <form action="{{route('book.update', $edit->id)}}" method="post">
         @csrf
         @method('PUT')
         <div class="form-group">
