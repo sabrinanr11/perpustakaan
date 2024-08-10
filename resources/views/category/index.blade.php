@@ -3,7 +3,7 @@
 
 @section('content')
 
-    {{-- <h1>Data User</h1> --}}
+     <!-- <h1>Data User</h1> -->
     <div align="right">
         <a href="{{ route('category.create') }}" class="btn btn-primary">Add</a>
     </div>

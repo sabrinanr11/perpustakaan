@@ -1,41 +1,41 @@
 @extends('layout.app')
-@section('title', 'Books Data')
+@section('title', 'Members Data')
 
 @section('content')
 
-    {{-- <h1>Data User</h1> --}}
+    <!-- <h1>Data Members</h1> -->
     <div align="right">
-        <a href="{{ route('book.create') }}" class="btn btn-primary">Add</a>
+        <a href="{{ route('member.create') }}" class="btn btn-primary">Add</a>
     </div>
 
     <table class="table table-bordered" >
         <thead>
             <tr align="center">
                 <th>No</th>
-                <th>Category</th>
-                <th>Title</th>
-                <th>Stock</th>
-                <th>Publisher</th>
-                <th>Publication Year</th>
-                <th>Author</th>
+                <th>Member</th>
+                <th>NIK</th>
+                <th>Fullname</th>
+                <th>Address</th>
+                <th>Number</th>
+                <th>Email</th>
+                <th>Username</th>
                 <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($books as $key=> $item)
+            @foreach ($members as $key=> $item)
                 <tr>
                     <td align="center">{{ $key+1 }}</td>
-                    <td>{{ $item->category->category_name }}</td>
-                    <td>{{ $item->title }}</td>
-                    <td>{{ $item->stock }}</td>
-                    <td>{{ $item->publisher }}</td>
-                    <td>{{ $item->publication_year }}</td>
-                    <td>{{ $item->author }}</td>
-
-
+                    <td>{{ $item->member_id}}</td>
+                    <td>{{ $item->nik}}</td>
+                    <td>{{ $item->fullname }}</td>
+                    <td>{{ $item->address }}</td>
+                    <td>{{ $item->number }}</td>
+                    <td>{{ $item->email }}</td>
+                    <td>{{ $item->username }}</td>
                     <td>
-                        <a href="{{ route('book.edit', $item->id) }}" class="btn btn-info" >Edit</a>
-                        <form action="{{ route('book.destroy', $item->id) }}" method="post">
+                        <a href="{{ route('member.edit', $item->id) }}" class="btn btn-info" >Edit</a>
+                        <form action="{{ route('member.destroy', $item->id) }}" method="post">
                             @csrf
                             <!-- cara ke-1 -->
                             <!-- @method('DELETE') -->
@@ -43,7 +43,6 @@
                             <input type="hidden" name="_method" value="DELETE">
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
-                        {{-- <!-- <a href="{{ route('user.destroy', $user->id) }}" onclick="return confirm('Apakah anda yakin?')>Delete</a> --> --}}
                     </td>
                 </tr>
             @endforeach

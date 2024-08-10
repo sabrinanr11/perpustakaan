@@ -43,9 +43,11 @@ class MemberController extends Controller
         $member->address = $request->address;
         $member->number = $request->number;
         $member->email = $request->email;
-        $member->username = $request->nik;
+        $member->username = $request->username;
         $member->password = $request->password;
         $member->save();
+        
+        return redirect()->to('member')->with('message', 'Data berhasil di edit');
 
         //cara ke dua
         // member::create([
@@ -57,7 +59,6 @@ class MemberController extends Controller
         //cara ke 3
         // Member::create($request->all());
 
-        return redirect()->to('member')->with('message', 'Data berhasil di edit');
     }
 
     /**
@@ -79,9 +80,8 @@ class MemberController extends Controller
      */
     public function edit($id)
     {
-        $edit = Book::find($id);
-
-        return view('book.edit', compact('edit'));
+        $edit = Member::find($id);
+        return view('member.edit', compact('edit'));
     }
 
     /**
@@ -93,7 +93,7 @@ class MemberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Book::where('id', $id)->update([
+        Member::where('id', $id)->update([
             'member_id' =>$request->member_id,
             'nik' =>$request->nik,
             'fullname' =>$request->fullname,
@@ -102,10 +102,10 @@ class MemberController extends Controller
             'email' =>$request->email,
             'username' =>$request->username,
             'password' =>$request->password,
+        ]);
 
             return redirect()->to('member')->with('message', 'Data berhasil di update');
 
-        ]);
     }
 
     /**

@@ -65,7 +65,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../layout/boxed.html" class="nav-link">
+                <a href="{{route('member.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Members</p>
                 </a>

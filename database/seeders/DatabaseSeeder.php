@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'sabrina@gmail.com',
         //     'password' =>Hash::make('12345')
         // ]);
-
+        
         $this->call([
             UsersTableSeeder::class,
         ]);

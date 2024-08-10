@@ -22,7 +22,7 @@ Route::post('actionLogin', [\App\Http\Controllers\LoginController::class, 'actio
 Route::resource('dashboard', \App\Http\Controllers\DashboardController::class);
 Route::resource('category', \App\Http\Controllers\CategoryController::class);
 Route::resource('book', \App\Http\Controllers\BookController::class);
-Route::resource('member', \App\Http\Controllers\MemberControllerController::class);
+Route::resource('member', \App\Http\Controllers\MemberController::class);
 
 
 
