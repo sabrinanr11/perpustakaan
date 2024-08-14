@@ -23,10 +23,12 @@ Route::resource('dashboard', \App\Http\Controllers\DashboardController::class);
 Route::resource('category', \App\Http\Controllers\CategoryController::class);
 Route::resource('book', \App\Http\Controllers\BookController::class);
 Route::resource('member', \App\Http\Controllers\MemberController::class);
+Route::resource('borrow', \App\Http\Controllers\BorrowController::class);
 
 
 
 
+Route::get('getBook/{category_id}', [\App\Http\Controllers\AjaxController::class, 'getBookData']);
 //get, post, put, delete
 Route::resource('belajar', \App\Http\Controllers\BelajarController::class);
 Route::resource('user', \App\Http\Controllers\UserController::class);
