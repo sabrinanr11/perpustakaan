@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <form action="{{ route('category.store') }}" method="post">
+    <form action="{{ route('borrow.store') }}" method="post">
         @csrf
         <div class="row">
             <div class="col-sm-6">
@@ -13,7 +13,7 @@
                         <label for="">Transaction code</label>
                     </div>
                     <div class="col-sm-6">
-                        <input class="form-control" type="text" name="transaction_code" readonly>
+                        <input value="{{$transaction_code}}" class="form-control" type="text" name="transaction_code">
                     </div>
                 </div>
                 <div class="form-group row ">
@@ -21,9 +21,12 @@
                         <label for="">Member's Name</label>
                     </div>
                     <div class="col-sm-6">
-                        <select name="" id="" class="form-control">
+                        <select name="member_id" id="" class="form-control">
                             <option value="">Select Member</option>
-                            <option value=""></option>
+                            @foreach ($members as $member)
+
+                            @endforeach
+                            <option value="{{$member->id}}">{{$member->fullname}}</option>
                         </select>
                     </div>
                 </div>
@@ -63,7 +66,7 @@
                 <label for="">Category Book</label>
             </div>
             <div class="col-sm-4">
-                <select name="" id="category_id" class="form-control">
+                <select name="category_id" id="category_id" class="form-control">
                     <option value="">Select Category</option>
                     @foreach ($categories as $category)
                     <option value="{{$category->id}}">{{$category->category_name}}</option>
@@ -80,7 +83,7 @@
                     <option value="">Select Title of Book</option>
                     <option value=""></option>
                 </select>
-                <input type="hidden" id="publisher">
+                <input type="text" id="publisher">
             </div>
         </div>
 

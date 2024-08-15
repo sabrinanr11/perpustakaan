@@ -29,6 +29,7 @@ Route::resource('borrow', \App\Http\Controllers\BorrowController::class);
 
 
 Route::get('getBook/{category_id}', [\App\Http\Controllers\AjaxController::class, 'getBookData']);
+Route::get('getBooks/{book_id}', [\App\Http\Controllers\AjaxController::class, 'getBook']);
 //get, post, put, delete
 Route::resource('belajar', \App\Http\Controllers\BelajarController::class);
 Route::resource('user', \App\Http\Controllers\UserController::class);

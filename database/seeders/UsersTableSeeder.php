@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Member;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -21,5 +22,13 @@ class UsersTableSeeder extends Seeder
             'email' =>'admin@gmail.com',
             'password' => Hash::make('12345'),
         ]);
+
+        Member::create([
+            'nisn' => '22222',
+            'fullname' => 'Sabrina',
+            'email' =>'admin@gmail.com',
+            'phone_number' => ('11111111'),
+        ]);
+
     }
 }

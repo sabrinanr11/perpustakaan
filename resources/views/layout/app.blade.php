@@ -102,42 +102,63 @@
     <script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('assets/dist/js/demo.js') }}"></script>
-    @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+    @include('sweetalert::alert', ['cdn' => 'https://cdn.jsdelivr.net/npm/sweetalert2@9'])
     <script>
-        $('#add-row').click(function(){
+        $('#add-row').click(function() {
             let tbody = $("tbody");
-            let no = tbody.find("tr").length + 1, publisher = $('#publisher').val(), title = $('#book_id').find("option:selected").text();
+            let no = tbody.find("tr").length + 1,
+                publisher = $('#publisher').val(),
+                title = $('#book_id').find("option:selected").text(),
+                book_id = $('#book_id').val();
             let newRow = "<tr>";
-                newRow += "<td>"+no+"</td>";
-                newRow += "<td>"+title+"</td>";
-                newRow += "<td>"+publisher+"</td>";
-                newRow += "<td><button type='button' class='btn btn-danger btn-sm delete-row'>Delete Row</button></td>";
-                newRow += "</tr>";
+            newRow += "<td>" + no + "</td>";
+            newRow += "<td>" + title + "<input type='hidden' name='book_id[]' id='book_id' value='" + book_id +
+                "'></td>";
+            newRow += "<td>" + publisher + "</td>";
+            newRow += "<td><button type='button' class='btn btn-danger btn-sm delete-row'>Delete Row</button></td>";
+            newRow += "</tr>";
             tbody.append(newRow);
 
-            $('.delete-row').click(function(){
+            $('.delete-row').click(function() {
                 $(this).closest('tr').remove();
             })
         });
 
-        $('#category_id').change(function(){
-            let category_id = $(this).val(), option="";
+        $('#category_id').change(function() {
+            let category_id = $(this).val(),
+                option = "";
             // console.log(category_id);
             let category_name = $(this).find('option:selected').text();
 
             $.ajax({
-                type:"get",
-                dataType:"json",
-                url:"/getBook/" + category_id,
-                success:function(data){
+                type: "get",
+                dataType: "json",
+                url: "/getBook/" + category_id,
+                success: function(data) {
                     option += "<option value=''>Select Book</option>"
-                    $.each(data.data, function(index, value){
-                        $('#publisher').val(value.publisher);
-                        // console.log(value);
-                        option += "<option value="+value.id+">"+value.title+"</option>"
+                    $.each(data.data, function(index, value) {
+                        // $('#publisher').val(value.publisher);
+                        console.log(value);
+                        option += "<option value=" + value.id + ">" + value.title + "</option>"
                     });
                     // console.log(option);
                     $('#book_id').html(option);
+                }
+            });
+        });
+
+        $('#book_id').change(function() {
+            let book_id = $(this).val();
+            // let book_name = $(this).find('option:selected').text();
+
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: "/getBooks/" + book_id,
+                success: function(res) {
+                    //alert();
+                    $("#publisher").val(res.data.publisher);
+                    // document.write(res);
                 }
             });
         });

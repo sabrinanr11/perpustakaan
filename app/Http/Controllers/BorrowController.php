@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Borrow;
+use App\Models\BorrowingDetail;
 use App\Models\Category;
+use App\Models\Member;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use \RealRashid\SweetAlert\Facades\Alert;
 
 class BorrowController extends Controller
 {
@@ -15,7 +19,7 @@ class BorrowController extends Controller
      */
     public function index()
     {
-        $borrows = Category::get();
+        $borrows = Borrow::with('member')->get();
         return view('borrow.index', compact('borrows'));
     }
 
@@ -27,7 +31,13 @@ class BorrowController extends Controller
     public function create()
     {
         $categories = Category::get();
-        return view('borrow.create', compact('categories'));
+        $members = Member::get();
+        $unique_code = Borrow::get()->last();
+        $borrow_id = isset($unique_code->id) ? ($unique_code->id == "" ? 1 : $unique_code->id) : '';
+        $borrow_id++;
+        $transaction_code = "BRW" . date("dmY") . sprintf("%03s", $borrow_id);
+        return view('borrow.create', compact('categories','members','transaction_code'));
+
     }
 
     /**
@@ -38,7 +48,26 @@ class BorrowController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $borrows=Borrow::create([
+            'transaction_code' =>$request->transaction_code,
+            'member_id' =>$request->member_id,
+            'borrowing_date' =>$request->borrowing_date,
+            'return_date' =>$request->return_date,
+            // 'operator' =>Auth::user()->name,
+            'operator' =>(Auth::user()->name ?? 'Sabrina'),
+        ]);
+
+        if ($borrows){
+            foreach ($request->book_id as $key => $val){
+             BorrowingDetail::create([
+                'book_id' => $val,
+                'borrow_id' =>$borrows->id,
+            ]);
+            }
+        }
+        Alert::success('NICE', 'Message');
+        return redirect()->to('borrow')->with('message', 'Data berhasil');
+
     }
 
     /**

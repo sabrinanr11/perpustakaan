@@ -12,13 +12,13 @@
         <thead>
             <tr align="center">
                 <th>No</th>
-                <th>Member</th>
-                <th>NIK</th>
+                <th>NISN</th>
                 <th>Fullname</th>
-                <th>Address</th>
-                <th>Number</th>
+                <th>Phone Number</th>
                 <th>Email</th>
-                <th>Username</th>
+                {{-- <th>Address</th> --}}
+                {{-- <th>Member</th> --}}
+                {{-- <th>Username</th> --}}
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -26,13 +26,13 @@
             @foreach ($members as $key=> $item)
                 <tr>
                     <td align="center">{{ $key+1 }}</td>
-                    <td>{{ $item->member_id}}</td>
-                    <td>{{ $item->nik}}</td>
+                    <td>{{ $item->nisn}}</td>
                     <td>{{ $item->fullname }}</td>
-                    <td>{{ $item->address }}</td>
-                    <td>{{ $item->number }}</td>
+                    <td>{{ $item->phone_number }}</td>
                     <td>{{ $item->email }}</td>
-                    <td>{{ $item->username }}</td>
+                    {{-- <td>{{ $item->member_id}}</td> --}}
+                    {{-- <td>{{ $item->address }}</td> --}}
+                    {{-- <td>{{ $item->username }}</td> --}}
                     <td>
                         <a href="{{ route('member.edit', $item->id) }}" class="btn btn-info" >Edit</a>
                         <form action="{{ route('member.destroy', $item->id) }}" method="post">

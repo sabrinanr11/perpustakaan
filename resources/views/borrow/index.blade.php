@@ -12,18 +12,26 @@
         <thead>
             <tr align="center">
                 <th>No</th>
-                <th>Nama</th>
-                <th>Aksi</th>
+                <th>transaction code</th>
+                <th>Member's Name</th>
+                <th>Borrowing Date</th>
+                <th>Return Date</th>
+                <th>Action</th>
+
             </tr>
         </thead>
         <tbody>
             @foreach ($borrows as $key=> $item)
                 <tr>
                     <td align="center">{{ $key+1 }}</td>
-                    <td>{{ $item->category_name }}</td>
+                    <td>{{$item->transaction_code}}</td>
+                    <td>{{$item->member->fullname}}</td>
+                    <td>{{date('D, d-m-Y', strtotime($item->borrowing_date)) }}</td>
+                    <td>{{date('D, d-m-Y', strtotime($item->return_date)) }}</td>
                     <td>
+
                         <a href="{{ route('category.edit', $item->id) }}" class="btn btn-info" >Edit</a>
-                        <form action="{{ route('category.destroy', $item->id) }}" method="post">
+                        <form action="{{ route('borrow.destroy', $item->id) }}" method="post">
                             @csrf
                             <!-- cara ke-1 -->
                             <!-- @method('DELETE') -->

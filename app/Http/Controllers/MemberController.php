@@ -37,16 +37,15 @@ class MemberController extends Controller
     public function store(Request $request)
     {
         $member = new Member;
-        $member->member_id = $request->member_id;
-        $member->nik = $request->nik;
+        $member->nisn = $request->nisn;
         $member->fullname = $request->fullname;
-        $member->address = $request->address;
-        $member->number = $request->number;
         $member->email = $request->email;
-        $member->username = $request->username;
-        $member->password = $request->password;
+        $member->phone_number = $request->phone_number;
+        // $member->address = $request->address;
+        // $member->username = $request->username;
+        // $member->password = $request->password;
         $member->save();
-        
+
         return redirect()->to('member')->with('message', 'Data berhasil di edit');
 
         //cara ke dua
@@ -94,14 +93,11 @@ class MemberController extends Controller
     public function update(Request $request, $id)
     {
         Member::where('id', $id)->update([
-            'member_id' =>$request->member_id,
-            'nik' =>$request->nik,
+            'nisn' =>$request->nisn,
             'fullname' =>$request->fullname,
-            'address' =>$request->address,
-            'number' =>$request->number,
             'email' =>$request->email,
-            'username' =>$request->username,
-            'password' =>$request->password,
+            'phone_number' =>$request->phone_number,
+
         ]);
 
             return redirect()->to('member')->with('message', 'Data berhasil di update');

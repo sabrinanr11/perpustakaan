@@ -15,7 +15,13 @@ return new class extends Migration
     {
         Schema::create('borrows', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('member_id');
+            $table->string('transaction_code');
+            $table->date('borrowing_date');
+            $table->date('return_date');
+            $table->string('operator');
             $table->timestamps();
+            $table->foreign('member_id')->references('id')->on('members')->onDelete('cascade');
         });
     }
 

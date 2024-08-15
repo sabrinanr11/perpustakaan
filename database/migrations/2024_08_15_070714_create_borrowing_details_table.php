@@ -13,16 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('members', function (Blueprint $table) {
+        Schema::create('borrowing_details', function (Blueprint $table) {
             $table->id();
-            $table->string('nisn');
-            $table->string('fullname');
-            $table->string('email');
-            $table->string('phone_number', 13);
-            // $table->string('address');
-            // $table->string('username');
-            // $table->string('password');
+            $table->unsignedBigInteger('borrow_id');
+            $table->integer('book_id');
             $table->timestamps();
+            $table->foreign('borrow_id')->references('id')->on('borrows')->onDelete('cascade');
         });
     }
 
@@ -33,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('members');
+        Schema::dropIfExists('borrowing_details');
     }
 };

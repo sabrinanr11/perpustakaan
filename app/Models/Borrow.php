@@ -11,6 +11,14 @@ class Borrow extends Model
 
     protected $fillable = [
         'transaction_code',
-
+        'member_id',
+        'borrowing_date',
+        'return_date',
+        'operator'
     ];
+
+    public function member()
+    {
+        return $this->belongsTo(Member::class, 'member_id', 'id');
+    }
 }
